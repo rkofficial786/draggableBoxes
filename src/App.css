@@ -18,7 +18,7 @@
   align-items: center;
   background-color: var(--color-theme);
   color: #fff;
-  padding: 10px 20px;
+  padding: 20px 30px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -84,7 +84,7 @@ button:hover {
 }
 
 /* Styles for the switch button */
-/* Add this CSS to your existing stylesheet or create a new one */
+
 
 /* Switch container styling */
 .switch-container {
@@ -138,3 +138,13 @@ button:hover {
 .getting_started p{
   font-size: 30px;
 }
+
+.draggable_box {
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+  border: 1px solid #333;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+

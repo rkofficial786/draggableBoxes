@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "./component/Modal";
 import { IoMdAdd } from "react-icons/io";
 import { IoAddCircleOutline } from "react-icons/io5";
 import "./App.css";
+import { predefinedBoxes } from "./data";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  const handleBoxMouseDown = (event, index) => {
+    setIsDragging(true);
+
+    const box = boxes[index];
+    setOffset({
+      x: event.clientX - box.position.x,
+      y: event.clientY - box.position.y,
+    });
+  };
+
+  const handleBoxMouseMove = (event, index) => {
+    if (isDragging) {
+      const newBoxes = [...boxes];
+      const box = newBoxes[index];
+      box.position = {
+        x: event.clientX - offset.x,
+        y: event.clientY - offset.y,
+      };
+      setBoxes(newBoxes);
+    }
+  };
+
+  const handleBoxMouseUp = () => {
+    setIsDragging(false);
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -26,7 +56,7 @@ function App() {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    console.log(type, "tyope");
+
     const newValue =
       type === "checkbox"
         ? boxDimensions.round == true
@@ -55,6 +85,10 @@ function App() {
             boxDimensions.round ? "9999" : boxDimensions.borderRadius
           }px`,
           text: `${boxDimensions.text}`,
+          position: {
+            x: window.innerWidth / 2 - parseInt(boxDimensions.width, 10) / 2,
+            y: window.innerHeight / 2 - parseInt(boxDimensions.height, 10) / 2,
+          },
         },
       ]);
       setBoxDimensions({
@@ -97,12 +131,16 @@ function App() {
   }
 `;
 
+  useEffect(() => {
+    setBoxes(predefinedBoxes);
+  }, []);
+
   return (
     <div className="App">
       <style>{switchStyle}</style>
 
       <div className="header">
-        <p>Table layout</p>
+        <p>Dynamic Position</p>
         <IoMdAdd className="add_button" onClick={openModal} />
       </div>
 
@@ -180,7 +218,7 @@ function App() {
               </div>
 
               <button className="create-box-btn" onClick={handleBoxCreate}>
-                Create Box
+                Create
               </button>
             </div>
           }
@@ -194,7 +232,7 @@ function App() {
         </div>
       )}
 
-      <div className="created-boxes">
+      <div className="created-boxes ">
         {boxes.map((box, index) => (
           <div
             key={index}
@@ -205,8 +243,13 @@ function App() {
               background: "#3498db",
               margin: "10px",
               display: "inline-block",
+              left: `${box.position.x}px`,
+              top: `${box.position.y}px`,
             }}
-            className="boxMain"
+            className="boxMain draggable_box"
+            onMouseDown={(event) => handleBoxMouseDown(event, index)}
+            onMouseMove={(event) => handleBoxMouseMove(event, index)}
+            onMouseUp={handleBoxMouseUp}
           >
             {box.text}
           </div>
