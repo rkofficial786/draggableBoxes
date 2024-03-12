@@ -1,50 +1,27 @@
-import React, { useState } from "react";
-import "./App.css";
+import React from "react";
 
-const DraggableBox = () => {
-  const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-
-  const handleMouseDown = (event) => {
-    setIsDragging(true);
-    setOffset({
-      x: event.clientX - position.x,
-      y: event.clientY - position.y,
-    });
-  };
-
-  const handleMouseMove = (event) => {
-    if (isDragging) {
-      const x = event.clientX - offset.x;
-      const y = event.clientY - offset.y;
-      setPosition({ x, y });
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
+const Box = ({ box, index, handleBoxMouseDown, handleBoxMouseMove, handleBoxMouseUp }) => {
   return (
     <div
-      className="draggable-box"
-      style={{ left: `${position.x}px`, top: `${position.y}px` }}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
+      key={index}
+      style={{
+        width: box.width,
+        height: box.height,
+        borderRadius: box.borderRadius,
+        background: "#3498db",
+        margin: "10px",
+        display: "inline-block",
+        left: `${box.position.x}px`,
+        top: `${box.position.y}px`,
+      }}
+      className="boxMain draggable_box"
+      onMouseDown={(event) => handleBoxMouseDown(event, index)}
+      onMouseMove={(event) => handleBoxMouseMove(event, index)}
+      onMouseUp={handleBoxMouseUp}
     >
-      <p>Drag me!</p>
+      {box.text}
     </div>
   );
 };
 
-function Draggable() {
-  return (
-    <div className="App">
-      <DraggableBox />
-    </div>
-  );
-}
-
-export default Draggable;
+export default Box;

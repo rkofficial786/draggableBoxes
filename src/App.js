@@ -4,11 +4,12 @@ import { IoMdAdd } from "react-icons/io";
 import { IoAddCircleOutline } from "react-icons/io5";
 import "./App.css";
 import { predefinedBoxes } from "./data";
+import Box from "./component/draggable";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   const handleBoxMouseDown = (event, index) => {
@@ -63,7 +64,7 @@ function App() {
           ? false
           : true
         : value;
-    console.log(newValue, "new");
+
     setBoxDimensions((prevDimensions) => ({
       ...prevDimensions,
       [name]: newValue,
@@ -82,7 +83,7 @@ function App() {
           width: `${boxDimensions.width}px`,
           height: `${boxDimensions.height}px`,
           borderRadius: `${
-            boxDimensions.round ? "9999" : boxDimensions.borderRadius
+            boxDimensions.round ? 99999 : boxDimensions.borderRadius
           }px`,
           text: `${boxDimensions.text}`,
           position: {
@@ -101,11 +102,8 @@ function App() {
     }
   };
 
-  console.log(boxes, "boxes");
-  console.log(boxDimensions, "box d");
-
   const switchStyle = `
-  .custom-switch {
+  .custom_switch {
     appearance: none;
     width: 40px;
     height: 20px;
@@ -118,7 +116,7 @@ function App() {
     transition: background-color 0.3s;
   }
 
-  .custom-switch-thumb {
+  .custom_switch_thumb {
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -195,13 +193,13 @@ function App() {
                 />
               </div>
 
-              <div className="switch-container">
-                <label htmlFor="round" className="switch-label">
+              <div className="switch_container">
+                <label htmlFor="round" className="switch_label">
                   Round
                 </label>
-                <div className="switch-btn">
+                <div className="switch_btn">
                   <div
-                    className="custom-switch"
+                    className="custom_switch"
                     onClick={() =>
                       handleInputChange({
                         target: { name: "round", type: "checkbox" },
@@ -209,7 +207,7 @@ function App() {
                     }
                   >
                     <div
-                      className={`custom-switch-thumb ${
+                      className={`custom_switch_thumb ${
                         boxDimensions.round ? "checked" : ""
                       }`}
                     ></div>
@@ -217,7 +215,7 @@ function App() {
                 </div>
               </div>
 
-              <button className="create-box-btn" onClick={handleBoxCreate}>
+              <button className="create_box_btn" onClick={handleBoxCreate}>
                 Create
               </button>
             </div>
@@ -232,27 +230,16 @@ function App() {
         </div>
       )}
 
-      <div className="created-boxes ">
+      <div className="created_boxes ">
         {boxes.map((box, index) => (
-          <div
+          <Box
             key={index}
-            style={{
-              width: box.width,
-              height: box.height,
-              borderRadius: box.borderRadius,
-              background: "#3498db",
-              margin: "10px",
-              display: "inline-block",
-              left: `${box.position.x}px`,
-              top: `${box.position.y}px`,
-            }}
-            className="boxMain draggable_box"
-            onMouseDown={(event) => handleBoxMouseDown(event, index)}
-            onMouseMove={(event) => handleBoxMouseMove(event, index)}
-            onMouseUp={handleBoxMouseUp}
-          >
-            {box.text}
-          </div>
+            box={box}
+            index={index}
+            handleBoxMouseDown={handleBoxMouseDown}
+            handleBoxMouseMove={handleBoxMouseMove}
+            handleBoxMouseUp={handleBoxMouseUp}
+          />
         ))}
       </div>
     </div>

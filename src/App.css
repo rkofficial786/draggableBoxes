@@ -87,7 +87,7 @@ button:hover {
 
 
 /* Switch container styling */
-.switch-container {
+.switch_container {
   display: flex;
   align-items: center;
   margin-top: 10px;
@@ -96,10 +96,10 @@ button:hover {
 }
 
 /* Switch label styling */
-.switch-label {
+.switch_label {
   flex: 2;
 }
-.switch-btn {
+.switch_btn {
   flex: 2;
 }
 
@@ -112,7 +112,7 @@ button:hover {
   display: flex !important;
 }
 
-.created-boxes {
+.created_boxes {
   display: flex;
 }
 
@@ -121,7 +121,7 @@ button:hover {
   flex-direction: column;
 }
 
-.create-box-btn {
+.create_box_btn {
   align-self: center;
   
 }
