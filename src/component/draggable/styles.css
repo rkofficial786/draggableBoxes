@@ -1,0 +1,21 @@
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .draggable-box {
+    position: absolute;
+    cursor: grab;
+    user-select: none;
+    border: 1px solid #333;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  .draggable-box p {
+    margin: 0;
+  }
+  

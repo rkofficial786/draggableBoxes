@@ -1,0 +1,140 @@
+.App {
+  font-family: "Arial", sans-serif;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-theme: #433466;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-theme);
+  color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header p {
+  margin: 0;
+  font-size: 24px;
+}
+
+.add_button {
+  font-size: 28px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.add_button:hover {
+  transform: scale(1.2);
+}
+
+/* modal */
+
+/* Add your general modal styles here */
+
+.ModalContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.singleInput {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+input {
+  width: 50%;
+  padding: 8px;
+  /* margin-bottom: 16px; */
+  box-sizing: border-box;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #e6e4e4;
+}
+
+input:focus{
+  border: 1px solid var(--color-theme);
+  box-shadow: rgba(67, 52, 102, 0.247) 0px 2px 8px 0px;
+}
+
+button {
+  padding: 10px;
+  background-color: var(--color-theme);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.5 ease-in-out;
+}
+
+button:hover {
+  transform: scale(0.97);
+}
+
+/* Styles for the switch button */
+/* Add this CSS to your existing stylesheet or create a new one */
+
+/* Switch container styling */
+.switch-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  justify-content: space-between;
+}
+
+/* Switch label styling */
+.switch-label {
+  flex: 2;
+}
+.switch-btn {
+  flex: 2;
+}
+
+.boxMain {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  height: 100%;
+  display: flex !important;
+}
+
+.created-boxes {
+  display: flex;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-box-btn {
+  align-self: center;
+  
+}
+
+.getting_started{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.getting_started p{
+  font-size: 30px;
+}
